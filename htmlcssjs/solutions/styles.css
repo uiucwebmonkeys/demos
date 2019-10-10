@@ -1,0 +1,25 @@
+body {
+	background-color: #001548;
+	min-height: 1000px;
+}
+
+#timer-box {
+	height: 150px;
+	position: sticky;
+	top: 0;
+	margin: auto;
+	margin-left: 20px;
+	margin-right: 20px;
+	text-align: center;
+
+	background-color: white;
+}
+
+#time {
+	text-align: center;
+	font-size: 50px;
+}
+
+#start-timer {
+	font-size: 25px;
+}
