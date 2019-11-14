@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const app = express();
 const server = require('http').Server(app);
 // app.use(express.static(path.join(__dirname, 'src')));
@@ -10,12 +9,16 @@ app.use(express.json());
 
 app.get('/hello', (req, res) => res.send('world'));
 
-app.post('/create-user', (req, res, next) => {
+app.post('/create_user', (req, res, next) => {
   if ('username' in req.body) {
+    if (!('users' in db)) {
+      db['users'] = {};
+    }
 
     // Check if user with username already exists
 
-    db[req.body.username] = req.body;
+    db['users'][req.body.username] = req.body;
+    console.log(db);
     const mesg = 'User with username ' + req.body.username + ' created';
     res.status(201).send({message: mesg});
   } else {
@@ -38,7 +41,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/users', (req, res, next) => {
-  res.status(200).send(db);
+  res.status(200).send(db.users);
 });
 
 server.listen(process.env.PORT || 8080);
